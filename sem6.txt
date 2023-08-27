@@ -1,0 +1,541 @@
+import 'package:myfirstproject/cgpa.dart';
+import 'controller.dart';
+import 'drop_down_helper.dart';
+import 'package:flutter/material.dart';
+
+
+class StudentGPA6 extends StatefulWidget{
+  const StudentGPA6({ Key? key }) : super(key: key);
+  @override
+  State<StudentGPA6> createState() => _StudentGPAState6();
+}
+
+
+class _StudentGPAState6 extends State<StudentGPA6> {
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    List<TextEditingController> _marks = [
+      for(int i = 0; i < 8; i++)
+        TextEditingController()
+    ];
+
+    var _tot = TextEditingController();
+    var _avg = TextEditingController();
+
+    List<int> grade = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    num result;
+    num sum = 0;
+    num avg;
+
+
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
+      appBar: AppBar(title: Text("Student Info Capsule"),),
+      drawer: Drawer(child: ListView(
+        children: [
+          UserAccountsDrawerHeader(accountName: Text('name'),
+            accountEmail: Text('name.cs20@bmsce.ac.in'),
+            currentAccountPicture: CircleAvatar(
+              child: ClipOval(
+                child: Image.network(
+                  'https://cdn.onlinewebfonts.com/svg/img_329115.png',
+                  fit: BoxFit.cover,
+                  width: 90,
+                  height: 90,
+                ),
+              ),
+            ),
+            decoration: BoxDecoration(color: Colors.blue),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text("HomePage", style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.book),
+            title: Text("SGPA Calculator", style: TextStyle(fontSize: 20),),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder:
+                  (context) => DropDownHelper()
+              ));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.book),
+            title: Text("CGPA Calculator", style: TextStyle(fontSize: 20),),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder:
+                  (context) => StudentCGPA()
+              ));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.school),
+            title: Text("Upload Marks Card", style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.upload_file),
+            title: Text(
+              "Upload Activity Certificates", style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.line_axis),
+            title: Text(
+              "Activity Points Tracker", style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text("logout", style: TextStyle(fontSize: 20),),
+          ),
+        ],
+      ),),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Form(
+            key: formKey3,
+            child: Container(
+
+              child: Column(
+                children: <Widget>[
+                  Text('SGPA Calculator sem 6', style: TextStyle(fontSize: 30,
+                      color: Colors.indigo,
+                      fontWeight: FontWeight.bold),),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("20CS6PCMAL:", style: TextStyle(fontSize: 15,
+                                color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter marks';
+                                }
+                                if (value.length > 2) {
+                                  return 'invalid marks';
+                                }
+                                if (int.parse(value) < 0) {
+                                  return 'marks cannot be negative';
+                                }
+                              },
+                              controller: _marks[0],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,
+                                    color: Colors.grey.shade400),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("20CS6PCCNS:", style: TextStyle(fontSize: 15,
+                                color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter marks';
+                                }
+                                if (value.length > 2) {
+                                  return 'invalid marks';
+                                }
+                                if (int.parse(value) < 0) {
+                                  return 'marks cannot be negative';
+                                }
+                              },
+                              controller: _marks[1],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,
+                                    color: Colors.grey.shade400),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("20CS6PCOMD:", style: TextStyle(fontSize: 15,
+                                color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter marks';
+                                }
+                                if (value.length > 2) {
+                                  return 'invalid marks';
+                                }
+                                if (int.parse(value) < 0) {
+                                  return 'marks cannot be negative';
+                                }
+                              },
+                              controller: _marks[2],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,
+                                    color: Colors.grey.shade400),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("220CS6HSMGE:", style: TextStyle(fontSize: 15,
+                                color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter marks';
+                                }
+                                if (value.length > 2) {
+                                  return 'invalid marks';
+                                }
+                                if (int.parse(value) < 0) {
+                                  return 'marks cannot be negative';
+                                }
+                              },
+                              controller: _marks[3],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,
+                                    color: Colors.grey.shade400),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("20CS6PEBDA:", style: TextStyle(fontSize: 15,
+                                color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter marks';
+                                }
+                                if (value.length > 2) {
+                                  return 'invalid marks';
+                                }
+                                if (int.parse(value) < 0) {
+                                  return 'marks cannot be negative';
+                                }
+                              },
+                              controller: _marks[4],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,
+                                    color: Colors.grey.shade400),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("220CS6OEJVP:", style: TextStyle(fontSize: 15,
+                                color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter marks';
+                                }
+                                if (value.length > 2) {
+                                  return 'invalid marks';
+                                }
+                                if (int.parse(value) < 0) {
+                                  return 'marks cannot be negative';
+                                }
+                              },
+                              controller: _marks[5],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,
+                                    color: Colors.grey.shade400),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("20CS6PWPW4:", style: TextStyle(fontSize: 15,
+                                color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter marks';
+                                }
+                                if (value.length > 2) {
+                                  return 'invalid marks';
+                                }
+                                if (int.parse(value) < 0) {
+                                  return 'marks cannot be negative';
+                                }
+                              },
+                              controller: _marks[6],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,
+                                    color: Colors.grey.shade400),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("20CS6SRSTI:", style: TextStyle(fontSize: 15,
+                                color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter marks';
+                                }
+                                if (value.length > 2) {
+                                  return 'invalid marks';
+                                }
+                                if (int.parse(value) < 0) {
+                                  return 'marks cannot be negative';
+                                }
+                              },
+                              controller: _marks[7],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,
+                                    color: Colors.grey.shade400),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 15,),
+
+
+                  GestureDetector
+                    (
+                      onTap: () {
+                        for (int i = 0; i < 8; i++) {
+                          if (int.parse(_marks[i].text) >= 90 &&
+                              int.parse(_marks[i].text) < 100) {
+                            grade[i] = 10;
+                          }
+                          else if (int.parse(_marks[i].text) >= 80 &&
+                              int.parse(_marks[i].text) < 90) {
+                            grade[i] = 9;
+                          }
+                          else if (int.parse(_marks[i].text) >= 70 &&
+                              int.parse(_marks[i].text) < 80) {
+                            grade[i] = 8;
+                          } else if (int.parse(_marks[i].text) >= 60 &&
+                              int.parse(_marks[i].text) < 70) {
+                            grade[i] = 7;
+                          } else if (int.parse(_marks[i].text) >= 50 &&
+                              int.parse(_marks[i].text) < 60) {
+                            grade[i] = 6;
+                          }
+                          else if (int.parse(_marks[i].text) >= 40 && int.parse(
+                              _marks[i].text) < 50) {
+                            grade[i] = 5;
+                          }
+                          else if (int.parse(_marks[i].text) >= 0 && int.parse(
+                              _marks[i].text) < 40) {
+                            grade[i] = 0;
+                          }
+                        }
+                        for (int i = 0; i < 3; i++) {
+                          sum = sum + (grade[i] * 4);
+                        }
+                        sum = sum + (grade[3] * 3);
+                        sum = sum + (grade[4] * 4);
+                        sum = sum + (grade[5] * 3);
+                        sum = sum + (grade[6] * 2);
+                        sum = sum + (grade[7] * 1);
+
+
+                        result = sum;
+                        avg = (result / 26.0);
+                        _tot.text = result.toString();
+                        _avg.text = avg.toString();
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: size.height / 14,
+                        width: size.width / 2,
+                        decoration: BoxDecoration(color: Colors.red,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Text("Calculate SGPA",
+                          style: TextStyle(color: Colors.white,
+                              fontWeight: FontWeight.bold),),
+                      )
+                  ),
+                  SizedBox(height: 15,),
+
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("SGPA:", style: TextStyle(fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextField(
+                              controller: _avg,
+                              decoration: InputDecoration(
+                                  labelText: "SGPA",
+                                  labelStyle: TextStyle(fontSize: 12,
+                                      color: Colors.grey.shade400),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10))
+                              )
+                          ),
+                        ),
+                        SizedBox(width: 30),
+                      ]
+                  ),
+                  SizedBox(height: 15,),
+                  Row(
+                    children: [
+                      SizedBox(width: 20),
+                      Expanded(child: ElevatedButton(
+                          child: Text('Approval'
+                          ),
+                          onPressed:() {
+                            setState(() {
+                              if (formKey3.currentState!.validate()) {}
+                            });
+                          }
+
+                      ),
+                      ),
+                      SizedBox(width: 50),
+                      Expanded(child: ElevatedButton(
+                          child: Text('Download'),
+                          onPressed: () {
+                            setState(() {
+                              if (formKey3.currentState!.validate()) {}
+                            });
+                          }
+                      ),
+                      ),
+
+                      SizedBox(width: 20),
+
+
+                    ],
+                  )
+                ],
+
+              ),
+
+            )
+        ),
+      ),
+    );
+  }
+}

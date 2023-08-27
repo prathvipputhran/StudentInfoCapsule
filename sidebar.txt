@@ -1,0 +1,82 @@
+import 'drop_down_helper.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+
+          primarySwatch: Colors.indigo,
+        ),
+      home: Menubar(),
+        );
+  }
+}
+
+class Menubar extends StatefulWidget {
+  const Menubar({Key? key}) : super(key: key);
+
+  @override
+  _MenubarState createState() => _MenubarState();
+}
+
+class _MenubarState extends State<Menubar> {
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(title: Text("Coding Comics"),),
+      drawer: Drawer(child: ListView(
+        children: [
+          DrawerHeader(
+            decoration: BoxDecoration(color: Colors.blue
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),color: Colors.white),
+                  child: Center(child: Text("SIC",style: TextStyle(fontSize: 24),),)
+
+                ),
+                SizedBox(height: 20,),
+                Text("Student Info Capsule",style: TextStyle(color: Colors.white,fontSize: 26),)
+
+              ],
+            )),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text("HomePage",style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.book),
+            title: Text("GPA Calculator",style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.school),
+            title: Text("Marks Card Upload",style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.line_axis),
+            title: Text("Activity Points Tracker",style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text("logout",style: TextStyle(fontSize: 20),),
+          ),
+        ],
+          ),),
+        body: Container(),
+    );
+  }
+}
+
