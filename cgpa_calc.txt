@@ -1,0 +1,491 @@
+import 'controller.dart';
+import 'drop_down_helper.dart';
+import 'package:flutter/material.dart';
+
+class StudentCGPA extends StatefulWidget{
+  const StudentCGPA({ Key? key }) : super(key: key);
+  @override
+  State<StudentCGPA> createState() => _StudentCGPAState();
+}
+
+class _StudentCGPAState extends State<StudentCGPA>{
+
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    List<TextEditingController> _sgpa=[
+      for(int i=0;i<8;i++)
+        TextEditingController()];
+
+    var _tot = TextEditingController();
+    var _avg = TextEditingController();
+
+    num result;
+    num sum = 0;
+    num avg;
+
+
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
+      appBar: AppBar(title: Text("Student Info Capsule"),),
+      drawer: Drawer(child: ListView(
+        children: [
+          UserAccountsDrawerHeader(accountName: Text('samhitha'),
+            accountEmail: Text('samhitha.cs20@bmsce.ac.in'),
+            currentAccountPicture: CircleAvatar(
+              child: ClipOval(
+                child:Image.network(
+                  'https://cdn.onlinewebfonts.com/svg/img_329115.png',
+                  fit: BoxFit.cover,
+                  width: 90,
+                  height: 90,
+                ),
+              ),
+            ),
+            decoration: BoxDecoration(color: Colors.blue),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text("HomePage",style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.book),
+            title: Text("SGPA Calculator",style: TextStyle(fontSize: 20),),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder:
+                  (context) => DropDownHelper()
+              ));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.book),
+            title: Text("CGPA Calculator",style: TextStyle(fontSize: 20),),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder:
+                  (context) => DropDownHelper()
+              ));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.school),
+            title: Text("Upload Marks Card",style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.upload_file),
+            title: Text("Upload Activity Certificates",style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.line_axis),
+            title: Text("Activity Points Tracker",style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text("logout",style: TextStyle(fontSize: 20),),
+          ),
+        ],
+      ),),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Form(
+            key: formKey,
+            child: Container(
+
+              child: Column(
+                children: <Widget>[
+                  Text('CGPA Calculator',style: TextStyle(fontSize: 30,color:Colors.indigo,fontWeight:FontWeight.bold),),
+                  Text('(Enter 0.0 if SGPA not obtained)',style: TextStyle(fontSize: 20,color:Colors.indigo,fontWeight:FontWeight.bold),),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("sem1",style: TextStyle(fontSize: 15,color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter sgpa';
+                                }
+                                if(double.parse(value) < 0.0) {
+                                  return 'invalid sgpa';
+                                }
+                                if(double.parse(value) > 10.0) {
+                                  return 'invalid sgpa';
+                                }},
+                              controller: _sgpa[0],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,color: Colors.grey.shade400),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("sem2",style: TextStyle(fontSize: 15,color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+    if (value!.isEmpty) {
+    return 'please enter sgpa';
+    }
+    if(double.parse(value) < 0.0) {
+    return 'invalid sgpa';
+    }
+    if(double.parse(value) > 10.0) {
+      return 'invalid sgpa';
+    }},
+
+
+
+                              controller: _sgpa[1],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,color: Colors.grey.shade400),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("sem3",style: TextStyle(fontSize: 15,color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter sgpa';
+                                }
+                                if(double.parse(value) < 0.0) {
+                                  return 'invalid sgpa';
+                                }
+                                if(double.parse(value) > 10.0) {
+                                  return 'invalid sgpa';
+                                }},
+                              controller: _sgpa[2],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,color: Colors.grey.shade400),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("sem4",style: TextStyle(fontSize: 15,color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter sgpa';
+                                }
+                                if(double.parse(value) < 0.0) {
+                                  return 'invalid sgpa';
+                                }
+                                if(double.parse(value) > 10.0) {
+                                  return 'invalid sgpa';
+                                }},
+                              controller: _sgpa[3],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,color: Colors.grey.shade400),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("sem5",style: TextStyle(fontSize: 15,color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter sgpa';
+                                }
+                                if(double.parse(value) < 0.0) {
+                                  return 'invalid sgpa';
+                                }
+                                if(double.parse(value) > 10.0) {
+                                  return 'invalid sgpa';
+                                }},
+                              controller: _sgpa[4],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,color: Colors.grey.shade400),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("sem6",style: TextStyle(fontSize: 15,color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter sgpa';
+                                }
+                                if(double.parse(value) < 0.0) {
+                                  return 'invalid sgpa';
+                                }
+                                if(double.parse(value) > 10.0) {
+                                  return 'invalid sgpa';
+                                }},
+                              controller: _sgpa[5],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,color: Colors.grey.shade400),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("sem7",style: TextStyle(fontSize: 15,color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter sgpa';
+                                }
+                                if(double.parse(value) < 0.0) {
+                                  return 'invalid sgpa';
+                                }
+                                if(double.parse(value) > 10.0) {
+                                  return 'invalid sgpa';
+                                }},
+                              controller: _sgpa[6],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,color: Colors.grey.shade400),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 5,),
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("sem8",style: TextStyle(fontSize: 15,color: Colors.black)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextFormField(
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'please enter sgpa';
+                                }
+                                if(double.parse(value) < 0.0) {
+                                  return 'invalid sgpa';
+                                }
+                                if(double.parse(value) > 10.0) {
+                                  return 'invalid sgpa';
+                                }},
+                              controller: _sgpa[7],
+                              decoration: InputDecoration(
+                                labelText: "Enter Final Marks",
+                                labelStyle: TextStyle(fontSize: 12,color: Colors.grey.shade400),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                              )
+                          ),
+                        ),
+                      ]
+                  ),
+                  SizedBox(height: 15,),
+
+                  GestureDetector
+                    (
+                      onTap:(){
+                     sum = double.parse(_sgpa[0].text)*20 +
+                         double.parse(_sgpa[1].text)*20 +
+                         double.parse(_sgpa[2].text)*24 +
+                         double.parse(_sgpa[3].text)*26 +
+                         double.parse(_sgpa[4].text)*25 +
+                         double.parse(_sgpa[5].text)*25 +
+                         double.parse(_sgpa[6].text)*18 +
+                         double.parse(_sgpa[7].text)*16
+                        ;
+
+                        result = sum;
+                     if(double.parse(_sgpa[2].text) == 0.0) {
+                       avg = (result / 40.0);
+                     }
+                     else if(double.parse(_sgpa[3].text) == 0.0) {
+                       avg = (result / 64.0);
+                     }
+                        else if(double.parse(_sgpa[4].text) == 0.0) {
+                          avg = (result / 90.0);
+                        }
+                     else if(double.parse(_sgpa[5].text) == 0.0) {
+                       avg = (result / 115.0);
+                     }
+                     else if(double.parse(_sgpa[6].text) == 0.0) {
+                       avg = (result / 140.0);
+                     }
+                     else if(double.parse(_sgpa[7].text) == 0.0) {
+                       avg = (result / 158.0);
+                     }
+                     else {
+                       avg = (result / 174.0);
+                     }
+                        _tot.text = result.toString();
+                        _avg.text = avg.toString();
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: size.height / 14,
+                        width: size.width / 2,
+                        decoration: BoxDecoration(color: Colors.red,
+                            borderRadius: BorderRadius.circular(5)),
+                        child: Text("Calculate CGPA",
+                          style: TextStyle(color: Colors.white,
+                              fontWeight: FontWeight.bold),),
+                      )
+                  ),
+                  SizedBox(height: 15,),
+
+                  Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child:
+                            Text("CGPA:",style: TextStyle(fontSize: 20,color: Colors.black,fontWeight:FontWeight.bold)),
+                          ),
+                        ),
+                        Expanded(
+                          child:
+
+                          TextField(
+                              controller: _avg,
+                              decoration: InputDecoration(
+                                  labelText: "CGPA",
+                                  labelStyle: TextStyle(fontSize: 12,color: Colors.grey.shade400),
+                                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))
+                              )
+                          ),
+                        ),
+                        SizedBox(width:30),
+                      ]
+                  ),
+                  SizedBox(height: 15,),
+                  Row(
+                      children:[
+                        SizedBox(width:20),
+                        Expanded(child: ElevatedButton(
+                            child: Text('Approval'
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                if(formKey.currentState!.validate()){}
+                              });
+
+                            }
+                        ),
+                        ),
+                        SizedBox(width:50),
+                        Expanded(child: ElevatedButton(
+                            child: Text('Download'),
+                            onPressed: () {
+                              setState(() {
+                                if(formKey.currentState!.validate()){}
+                              });
+
+                            }
+                        ),
+                        ),
+                        SizedBox(width:20),
+                      ]
+                  )
+                ],
+              ),
+
+            )
+        ),
+      ),
+    );
+
+  }
+}

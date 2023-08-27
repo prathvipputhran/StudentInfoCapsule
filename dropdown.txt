@@ -1,0 +1,164 @@
+import 'package:flutter/material.dart';
+
+class DropDownHelper extends StatefulWidget {
+  const DropDownHelper({Key? key}) : super(key: key);
+
+  @override
+  State<DropDownHelper> createState() => _DropDownHelperState();
+}
+
+class _DropDownHelperState extends State<DropDownHelper> {
+  List dropDownListData = [
+    {"title": "CSE", "value": "1"},
+    {"title": "ISE", "value": "2"},
+    {"title": "AI & ML", "value": "3"},
+    {"title": "ECE", "value": "4"},
+  ];
+  List dropDownListData2 = [
+    {"title": "sem 1", "value": "1"},
+    {"title": "sem 2", "value": "2"},
+    {"title": "sem 3", "value": "3"},
+    {"title": "sem 4", "value": "4"},
+  ];
+  List dropDownListData3 = [
+    {"title": "scheme 2019", "value": "1"},
+    {"title": "scheme 2020", "value": "2"},
+    {"title": "scheme 2022", "value": "3"},
+  ];
+
+  String defaultValue = "";
+  String secondDropDown = "";
+  String thirdDropDown = "";
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Student Info Capsule"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: ListView(children: [
+          const SizedBox(
+            height: 20,
+          ),
+          InputDecorator(
+            decoration: InputDecoration(
+              border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
+              contentPadding: const EdgeInsets.all(10),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                  isDense: true,
+                  value: defaultValue,
+                  isExpanded: true,
+                  menuMaxHeight: 350,
+                  items: [
+                    const DropdownMenuItem(
+                        child: Text(
+                          "Select Dept",
+                        ),
+                        value: ""),
+                    ...dropDownListData.map<DropdownMenuItem<String>>((data) {
+                      return DropdownMenuItem(
+                          child: Text(data['title']), value: data['value']);
+                    }).toList(),
+                  ],
+                  onChanged: (value) {
+                    print("selected Value $value");
+                    setState(() {
+                      defaultValue = value!;
+                    });
+                  }),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          InputDecorator(
+            decoration: InputDecoration(
+              border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
+              contentPadding: const EdgeInsets.all(10),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                  isDense: true,
+                  value: secondDropDown,
+                  isExpanded: true,
+                  menuMaxHeight: 350,
+                  items: [
+                    const DropdownMenuItem(
+                        child: Text(
+                          "Select sem",
+                        ),
+                        value: ""),
+                    ...dropDownListData2.map<DropdownMenuItem<String>>((data) {
+                      return DropdownMenuItem(
+                          child: Text(data['title']), value: data['value']);
+                    }).toList(),
+                  ],
+                  onChanged: (value) {
+                    print("selected Value $value");
+                    setState(() {
+                      secondDropDown = value!;
+                    });
+                  }),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          InputDecorator(
+            decoration: InputDecoration(
+              border:
+              OutlineInputBorder(borderRadius: BorderRadius.circular(15.0)),
+              contentPadding: const EdgeInsets.all(10),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String>(
+                  isDense: true,
+                  value: thirdDropDown,
+                  isExpanded: true,
+                  menuMaxHeight: 350,
+                  items: [
+                    const DropdownMenuItem(
+                        child: Text(
+                          "Select scheme",
+                        ),
+                        value: ""),
+                    ...dropDownListData3.map<DropdownMenuItem<String>>((data) {
+                      return DropdownMenuItem(
+                          child: Text(data['title']), value: data['value']);
+                    }).toList(),
+                  ],
+                  onChanged: (value) {
+                    print("selected Value $value");
+                    setState(() {
+                      thirdDropDown = value!;
+                    });
+                  }),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                if (secondDropDown == "") {
+                  print("Please select required fields");
+                } else {
+                  print("user selected course $defaultValue");
+                }
+              },
+              child: const Text("Submit"))
+        ]),
+      ),
+    );
+  }
+}
+
+
+

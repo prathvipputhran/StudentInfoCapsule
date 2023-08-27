@@ -1,0 +1,127 @@
+import 'package:database/login_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'cgpa.dart';
+import 'drop_down_helper.dart';
+
+User loggedinUser = "" as User;
+
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final _auth = FirebaseAuth.instance;
+
+
+
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  //using this function you can use the credentials of the user
+  void getCurrentUser() async {
+    try {
+      final user = await _auth.currentUser;
+      if (user != null) {
+        loggedinUser = user;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      drawer: Drawer(child: ListView(
+        children: [
+          UserAccountsDrawerHeader(accountName: Text('name'),
+            accountEmail: Text('name.cs20@bmsce.ac.in'),
+            currentAccountPicture: CircleAvatar(
+              child: ClipOval(
+                child: Image.network(
+                  'https://cdn.onlinewebfonts.com/svg/img_329115.png',
+                  fit: BoxFit.cover,
+                  width: 90,
+                  height: 90,
+                ),
+              ),
+            ),
+            decoration: BoxDecoration(color: Colors.blue),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text("HomePage", style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.book),
+            title: Text("SGPA Calculator", style: TextStyle(fontSize: 20),),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder:
+                  (context) => DropDownHelper()
+              ));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.book),
+            title: Text("CGPA Calculator", style: TextStyle(fontSize: 20),),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder:
+                  (context) => StudentCGPA()
+              ));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.school),
+            title: Text("Upload Marks Card", style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.upload_file),
+            title: Text(
+              "Upload Activity Certificates", style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.line_axis),
+            title: Text(
+              "Activity Points Tracker", style: TextStyle(fontSize: 20),),
+          ),
+          ListTile(
+            leading: Icon(Icons.logout),
+            title: Text("logout", style: TextStyle(fontSize: 20),),
+          ),
+        ],
+      ),),
+      appBar: AppBar(
+        leading: null,
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                _auth.signOut();
+                Navigator.pop(context);
+
+                //Implement logout functionality
+              }),
+        ],
+        title: Text('Home Page'),
+        backgroundColor: Colors.lightBlueAccent,
+      ),
+
+      body:Center(
+      child: Image.network(
+      'https://i.ytimg.com/vi/xpOfeW81lZU/maxresdefault.jpg',
+      fit: BoxFit.cover,
+      width: 300,
+      height: 300,
+    ),
+
+      ),
+
+
+    );
+  }
+}
